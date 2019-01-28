@@ -7,8 +7,9 @@
 
 <h1>EVEREST</h1>
 
-<div id="climbs">
 <h2>Climbs</h2>
+<div id="climbs">
+<p id="climb-text">You shouldn't see me</p>
 </div>
 
 
@@ -16,15 +17,12 @@
 
 function reloadData() {
 	$.getJSON("data/climbs.json", function(data) {
-		console.log(JSON.stringify(data));
+		document.getElementById("climb-text").value = JSON.stringify(data);
 	})
 
 }
 
-$(document).ready(function() {
-	reloadData();
-})
-
+window.setInterval(reloadData(), 5000);
 
 </script>
 
