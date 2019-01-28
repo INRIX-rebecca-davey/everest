@@ -14,6 +14,12 @@
 
 <h3>Counts</h3>
 <div id="counts"></div>
+<table id="counts-table">
+	<tr>
+		<th>Climber</th>
+		<th>Meters ascended</th>
+	</tr>
+</table>
 
 <script>
 
@@ -32,22 +38,33 @@ function getClimbsByPerson(data) {
 		}
 	});
 
-	return climberCounts;
-	
+	return climberCounts;	
+}
+
+function loadClimbCountsTable(climberCounts) {
+	var table = document.getElementById("counts-table");
+	Object.keys(climberCounts).forEach(function(key) {
+		newRow = table.insertRow(-1);
+		climberCell = newRow.insertCell(-1);
+		climberCell.innerHTML = key.toString();
+		countsCell = newRow.insertCell(-1);
+		countsCell = (climberCounts[key]*ClimbIncrementMeters).toString();
+
+	});
 }
 
 function reloadData() {
 	$.getJSON("data/climbs.json", function(data) {
 		document.getElementById("climb-text").innerHTML = JSON.stringify(data);
 		climberCounts = getClimbsByPerson(data);
-		console.log(JSON.stringify(climberCounts));
+		loadClimbCountsTable(climberCounts);
 	})
-
 }
 
 window.setInterval(function() {
 	reloadData();
 }, 5000);
+
 
 </script>
 
