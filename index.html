@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
 <body>
 
 <h1>EVEREST</h1>
 
+<div id="climbs">
+<h2>Climbs</h2>
+</div>
+
+
 <script>
-	
+
+function reloadData() {
+	$.getJSON("data/climbs.json", function(data) {
+		console.log(JSON.stringify(data));
+	})
+
+}
+
+$(document).ready(function() {
+	reloadData();
+})
+
+
 </script>
 
 </body>
