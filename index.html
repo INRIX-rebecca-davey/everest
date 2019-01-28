@@ -47,23 +47,28 @@ function loadClimbCountsTable(climberCounts) {
 		newRow = table.insertRow(-1);
 		climberCell = newRow.insertCell(-1);
 		climberCell.innerHTML = key.toString();
+
 		countsCell = newRow.insertCell(-1);
-		countsCell = (climberCounts[key]*ClimbIncrementMeters).toString();
+		countsCell.innerHTML = (climberCounts[key]*ClimbIncrementMeters).toString();
 
 	});
 }
 
+var fullData = {};
+
 function reloadData() {
 	$.getJSON("data/climbs.json", function(data) {
+		fullData = data;
 		document.getElementById("climb-text").innerHTML = JSON.stringify(data);
-		climberCounts = getClimbsByPerson(data);
-		loadClimbCountsTable(climberCounts);
 	})
 }
 
 window.setInterval(function() {
 	reloadData();
 }, 5000);
+
+climberCounts = getClimbsByPerson(fullData);
+loadClimbCountsTable(climberCounts);
 
 
 </script>
