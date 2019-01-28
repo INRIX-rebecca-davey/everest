@@ -9,7 +9,7 @@
 
 <h2>Climbs</h2>
 <div id="climbs">
-<p id="climb-text">You shouldn't see me</p>
+<p id="climb-text">You should not see me</p>
 </div>
 
 
@@ -23,7 +23,9 @@ function reloadData() {
 
 }
 
-window.setInterval(reloadData(), 5000);
+window.setInterval(function() {
+	console.log("hello");
+}, 5000);
 
 </script>
 
