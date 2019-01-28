@@ -12,13 +12,35 @@
 <p id="climb-text">You should not see me</p>
 </div>
 
+<h3>Counts</h3>
+<div id="counts"></div>
 
 <script>
 
+var ClimbIncrementMeters = 30.1;
+
+function getClimbsByPerson(data) {
+	var climberCounts = {};
+
+	data.climbs.forEach(function(climbObject) {
+		var climberName = climbObject.user;
+		if (climberName in climberCounts) {
+			var oldCount = climberCounts[climberName];
+			climberCounts[climberName] = oldCount + 1;	
+		} else {
+			climberCounts[climberName] = 1;
+		}
+	});
+
+	return climberCounts;
+	
+}
+
 function reloadData() {
 	$.getJSON("data/climbs.json", function(data) {
-		console.log("Updating...");
 		document.getElementById("climb-text").innerHTML = JSON.stringify(data);
+		climberCounts = getClimbsByPerson(data);
+		console.log(JSON.stringify(climberCounts));
 	})
 
 }
