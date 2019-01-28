@@ -17,7 +17,8 @@
 
 function reloadData() {
 	$.getJSON("data/climbs.json", function(data) {
-		document.getElementById("climb-text").value = JSON.stringify(data);
+		console.log("Updating...");
+		document.getElementById("climb-text").innerHTML = JSON.stringify(data);
 	})
 
 }
